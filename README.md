@@ -185,3 +185,23 @@ Functionalities:
 
 - Displays game statistics
 - Play again button to go to Game Screen
+
+# Tasks
+
+- [ ] Setup git & Github
+- [ ] Create & connect all the files: html, css & js files.
+- [ ] Create HTML skeleton & link it to the css & js files.
+- [ ] Main.js
+
+  - [ ] Create buildDom to ease construction
+  - [ ] Create splashScreen, gameScreen & gameOverScreen & associated remove screen functions.
+  - [ ] Create startGame();
+  - [ ] Link buttons to their functionality.
+
+- [ ] Create Game constructor & include it in startGame();
+- [ ] Create Player constructor
+- [ ] Create Pizza constructor
+- [ ] Create Worm constructor
+- [ ] Create Virus constructor
+- [ ] Move player, pizza, worm, virus in game.js
+- [ ] Update statistics in game.js
