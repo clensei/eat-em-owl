@@ -5,6 +5,7 @@ let splashScreen; // Start Game Screen
 let gameScreen // create gameScreen
 let gameOverScreen;
 
+
 // Creates DOM elements from a string representation
 function buildDom(htmlString) {
   const div = document.createElement("div");
@@ -61,6 +62,10 @@ function createGameScreen() {
                 <span>Biggest Size:</span>
                 <span class="biggest-size"></span>
             </div>
+            <div>
+                <span>Current Speed:<span>
+                <span class="current-speed"></span>
+            </div>
         </header>  
         <div class="canvas-container">
             <canvas></canvas> 
@@ -112,13 +117,18 @@ function removeGameOverScreen() {
 // -- Setting the game state - start or game over
 
 function startGame() {
+  
+  
   removeSplashScreen();
   removeGameOverScreen();
-
+  
   game = new Game(); 
   game.gameScreen = createGameScreen(); 
   
   game.start(); 
+
+  game.backgroundMusic.play()
+
 
 }
 

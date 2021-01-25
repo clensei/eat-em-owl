@@ -176,6 +176,29 @@ class Owl {
     }
   }
 
+  didCollideWithBonus(bonus) {
+    const owlTop = this.y;
+    const owlBottom = this.y + this.height;
+    const owlLeft = this.x;
+    const owlRight = this.x + this.width;
+
+    const bonusTop = bonus.y;
+    const bonusBottom = bonus.y + bonus.height;
+    const bonusLeft = bonus.x;
+    const bonusRight = bonus.x + bonus.width;
+
+    const crossLeft = bonusLeft <= owlRight && bonusLeft >= owlLeft;
+    const crossRight = bonusRight >= owlLeft && bonusRight <= owlRight;
+    const crossBottom = bonusBottom >= owlTop && bonusBottom <= owlBottom;
+    const crossTop = bonusTop <= owlBottom && bonusTop >= owlTop;
+
+    if ((crossLeft || crossRight) && (crossTop || crossBottom)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   decreaseSizeVirus() {
     this.width -= 40;
     this.height = this.width / this.aspectRatio;
