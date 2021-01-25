@@ -102,6 +102,7 @@ Functionalities:
 - speed
 - direction
 - image
+- points
 - biggest size
 
 ##### Methods
