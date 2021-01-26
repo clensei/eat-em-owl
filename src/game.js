@@ -8,6 +8,7 @@ class Game {
     this.pizza = [];
     this.worm = [];
     this.virus = [];
+    this.bonus = [];
     this.gameIsOver = false;
     this.gameScreen = null;
     this.score = 0;
@@ -15,19 +16,22 @@ class Game {
     this.speedWorm = 4;
     this.speedPizza = 2;
     this.speedVirus = 2;
+    this.speedBonus = 8;
     this.apparitionRatePizza = 0.99;
     this.apparitionRateVirus = 0.98;
     this.apparitionRateWorm = 0.995;
     this.apparitionRateBonus = 0.99;
     this.loopCounter = 0;
-    this.backgroundMusic = new Audio("../sounds/Audrey's Dance.mp3");
-    this.pizzaSound = new Audio("../sounds/eat sound.mp3");
-    this.virusSound = new Audio("../sounds/Homer Simpson Doh sound effect.mp3");
+    this.backgroundMusic = new Audio("sounds/Audrey's Dance.mp3");
+    this.pizzaSound = new Audio("sounds/eat sound.mp3");
+    this.virusSound = new Audio("sounds/Homer Simpson Doh sound effect.mp3");
     this.wormSound = new Audio(
-      "../sounds/Super Mario Power Up Sound Effect.mp3"
+      "sounds/Super Mario Power Up Sound Effect.mp3"
     );
-    this.deathSound = new Audio("../sounds/Wilhelm Scream sound effect.mp3");
-    this.bonus = 0;
+    this.deathSound = new Audio("sounds/Wilhelm Scream sound effect.mp3");
+    this.bonusTotal = 0;
+    this.bonusLoopCounter = 0;
+    this.shoot = false;
   }
 
   start() {
@@ -38,6 +42,7 @@ class Game {
     this.scoreElement = document.body.querySelector(".current-score");
     this.biggestSizeElement = document.body.querySelector(".biggest-size");
     this.speedElement = document.body.querySelector(".current-speed");
+    this.bonusElement = document.body.querySelector(".message-board span");
 
     this.containerWidth = this.canvasContainer.offsetWidth;
     this.containerHeight = this.canvasContainer.offsetHeight;
@@ -50,21 +55,30 @@ class Game {
     function handleKeyDown(event) {
       if (event.key === "ArrowDown" || event.key === "s") {
         this.owl.direction = "d";
-        console.log("down");
       } else if (event.key === "ArrowUp" || event.key === "z") {
         this.owl.direction = "u";
-        console.log("up");
       } else if (event.key === "ArrowLeft" || event.key === "q") {
         this.owl.direction = "l";
-        console.log("left");
       } else if (event.key === "ArrowRight" || event.key === "d") {
         this.owl.direction = "r";
-        console.log("right");
+      } else if (event.key === " ") {
+        this.shoot = true;
+        console.log("KEY DOWN", this.shoot);
+      }
+    }
+
+    function handleKeyUp(event) {
+      if (event.key === " ") {
+        this.shoot = false;
+        console.log("KEY UP", this.shoot);
       }
     }
 
     const boundHandleKeyDown = handleKeyDown.bind(this);
     document.body.addEventListener("keydown", boundHandleKeyDown);
+
+    const boundHandleKeyUp = handleKeyUp.bind(this);
+    document.body.addEventListener("keyup", boundHandleKeyUp);
 
     this.startLoop();
   }
@@ -78,15 +92,21 @@ class Game {
 
       this.changeBackground();
 
-      // create viruses / pizza / worm / bonus
+      if (this.shoot === true && this.bonusTotal > 0) {
+        this.virus = [];
+        this.bonusTotal--;
+        console.log("is this working?");
+      }
+
+      // create viruses / pizza / worm / bonus / bonus
 
       if (this.biggestSize > 150) {
         this.apparitionRateVirus -= 0.00001;
       }
+
       if (Math.random() > this.apparitionRateVirus) {
         function udlrGenerator() {
           let ranNum = Math.floor(Math.random() * 4) + 1;
-
           switch (ranNum) {
             case 1:
               ranLet = "u";
@@ -230,55 +250,55 @@ class Game {
         );
         this.worm.push(newWorm);
       }
+      if (Math.random() > this.apparitionRateBonus) {
+        function udlrGenerator() {
+          let ranNum = Math.floor(Math.random() * 4) + 1;
 
-      //   if (Math.random() > this.apparitionRateBonus) {
-      //     function udlrGenerator() {
-      //       let ranNum = Math.floor(Math.random() * 4) + 1;
+          switch (ranNum) {
+            case 1:
+              ranLet = "u";
+              break;
+            case 2:
+              ranLet = "d";
+              break;
+            case 3:
+              ranLet = "l";
+              break;
+            case 4:
+              ranLet = "r";
+              break;
+          }
+          return ranLet;
+        }
 
-      //       switch (ranNum) {
-      //         case 1:
-      //           ranLet = "u";
-      //           break;
-      //         case 2:
-      //           ranLet = "d";
-      //           break;
-      //         case 3:
-      //           ranLet = "l";
-      //           break;
-      //         case 4:
-      //           ranLet = "r";
-      //           break;
-      //       }
-      //       return ranLet;
-      //     }
+        function xyGenerator(ranLet) {
+          if (ranLet === "u") {
+            yVirus = 0;
+            xVirus = Math.random() * document.querySelector("canvas").width;
+          } else if (ranLet === "d") {
+            yVirus = document.querySelector("canvas").height;
+            xVirus = Math.random() * document.querySelector("canvas").width;
+          } else if (ranLet === "l") {
+            xVirus = 0;
+            yVirus = Math.random() * document.querySelector("canvas").height;
+          } else if (ranLet === "r") {
+            xVirus = document.querySelector("canvas").width;
+            yVirus = Math.random() * document.querySelector("canvas").height;
+          }
+        }
 
-      //     function xyGenerator(ranLet) {
-      //       if (ranLet === "u") {
-      //         yVirus = 0;
-      //         xVirus = Math.random() * document.querySelector("canvas").width;
-      //       } else if (ranLet === "d") {
-      //         yVirus = document.querySelector("canvas").height;
-      //         xVirus = Math.random() * document.querySelector("canvas").width;
-      //       } else if (ranLet === "l") {
-      //         xVirus = 0;
-      //         yVirus = Math.random() * document.querySelector("canvas").height;
-      //       } else if (ranLet === "r") {
-      //         xVirus = document.querySelector("canvas").width;
-      //         yVirus = Math.random() * document.querySelector("canvas").height;
-      //       }
-      //     }
+        udlrGenerator();
+        xyGenerator(ranLet);
 
-      //     udlrGenerator();
-      //     xyGenerator(ranLet);
-
-      //     const newBonus = new Bonus(
-      //       this.canvas,
-      //       xVirus,
-      //       yVirus,
-      //       ranLet
-      //     );
-      //     this.bonus.push(newBonus);
-      //   }
+        const newBonus = new Bonus(
+          this.canvas,
+          xVirus,
+          yVirus,
+          this.speedBonus,
+          ranLet
+        );
+        this.bonus.push(newBonus);
+      }
 
       // check if pizza/virus/worm are going off screen
       this.worm = this.worm.filter((worm) => {
@@ -289,22 +309,20 @@ class Game {
         pizza.updatePosition();
         return pizza.isInsideScreen;
       });
-
       this.virus = this.virus.filter((virus) => {
         virus.updatePosition();
         return virus.isInsideScreen;
       });
-
-      //   this.bonus = this.bonus.filter((bonus) => {
-      //     bonus.updatePosition();
-      //     return bonus.isInsideScreen;
-      //   });
+      this.bonus = this.bonus.filter((bonus) => {
+        bonus.updatePosition();
+        return bonus.isInsideScreen;
+      });
 
       // check collisions Virus / pizza / worm
       this.checkCollisionsVirus();
       this.checkCollisionsPizza();
       this.checkCollisionsWorm();
-      //   this.checkCollisionsBonus();
+      this.checkCollisionsBonus();
 
       // check if owl going through a wall
       this.owl.screenGoThrough();
@@ -324,7 +342,7 @@ class Game {
         this.backgroundMusic.pause();
       }
 
-      // draw the pizza / virus / worm
+      // draw the pizza / virus / worm / bonus
       this.virus.forEach((virus) => {
         virus.draw();
       });
@@ -334,9 +352,12 @@ class Game {
       this.worm.forEach((worm) => {
         worm.draw();
       });
-      //   this.bonus.forEach((bonus) => {
-      //     bonus.draw()
-      //   });
+      this.bonus.forEach((bonus) => {
+        bonus.draw();
+      });
+
+      // shoot all viruses
+      //   this.bonus.shootAllViruses();
 
       if (!this.gameIsOver) {
         window.requestAnimationFrame(loop);
@@ -344,58 +365,57 @@ class Game {
 
       // update Game Stats
       this.updateGameStats();
+
+      if (this.bonusTotal > 0) {
+        this.updateBonusStats();
+      }
+      if (this.bonusTotal === 0) {
+        this.bonusElement.innerHTML = "";
+      }
     }.bind(this);
     window.requestAnimationFrame(loop);
   }
 
-  // check collisions Virus
+  // check collisions Virus / pizza / worm / Bonus
   checkCollisionsVirus() {
     this.virus.forEach(function (virus) {
       if (this.owl.didCollideWithVirus(virus)) {
         this.virusSound.play();
         this.owl.decreaseSizeVirus();
         this.score -= 200;
-        console.log("collision with virus", this.score);
         virus.x = 0 - this.virus.height;
       }
     }, this);
   }
-
-  // check collisions Pizza
   checkCollisionsPizza() {
     this.pizza.forEach(function (pizza) {
       if (this.owl.didCollideWithPizza(pizza)) {
         this.pizzaSound.play();
         this.owl.increaseSizePizza();
         this.score += 300;
-        console.log("collision with pizza ", this.score);
         pizza.x = 0 - this.pizza.height;
       }
     }, this);
   }
-
-  // check collisions Worm
   checkCollisionsWorm() {
     this.worm.forEach(function (worm) {
       if (this.owl.didCollideWithWorm(worm)) {
         this.wormSound.play();
         this.owl.increaseSpeedWorm();
         this.score += 500;
-        console.log("collision with worm", this.score);
         worm.x = 0 - this.pizza.height;
       }
     }, this);
   }
-
-  // check collisions Bonus
-  //   checkCollisionsBonus() {
-  //       this.bonus.forEach(function(bonus){
-  //         if (this.owl.didCollideWithBonus(bonus)) {
-  //             this.bonus ++;
-  //             console.log('collision with Bonus ', this.bonus);
-  //         }
-  //       }, this);
-  //   }
+  checkCollisionsBonus() {
+    this.bonus.forEach(function (bonus) {
+      if (this.owl.didCollideWithBonus(bonus)) {
+        this.bonusTotal++;
+        this.score = this.score + 1000;
+        bonus.x = 0 - this.bonus.height;
+      }
+    }, this);
+  }
 
   gameOver() {
     this.deathSound.play();
@@ -419,5 +439,18 @@ class Game {
     this.scoreElement.innerHTML = this.score;
     this.biggestSizeElement.innerHTML = this.biggestSize;
     this.speedElement.innerHTML = this.owl.speed;
+  }
+
+  updateBonusStats() {
+    if (this.bonusLoopCounter < 100) {
+      this.bonusElement.innerHTML = `OMG you got ${this.bonusTotal} Bonus, ready to blast?`;
+      this.bonusLoopCounter++;
+    } else if (this.bonusLoopCounter < 200) {
+      this.bonusElement.innerHTML = `Press \`space\` to use your super Owl Power`;
+      this.bonusLoopCounter++;
+      if (this.bonusLoopCounter === 199) {
+        this.bonusLoopCounter = 0;
+      }
+    }
   }
 }

@@ -123,7 +123,7 @@ ol:hover {
 }
 
 .game-display {
-  margin-top: 50px;
+  margin-top: 30px;
   color: white;
   display: flex;
   justify-content: space-evenly;
@@ -132,7 +132,7 @@ ol:hover {
 }
 
 .canvas-container {
-  margin-top: 30px;
+  margin-top: 20px;
   border: 1px solid black;
   box-shadow: 2px -2px 40px #5ce1e6, -2px 2px 40px #ff5757;
   height: 70vh;
@@ -186,7 +186,7 @@ ol:hover {
   text-shadow: -2px 2px #5ce1e6, 2px -2px #ff5757;
   letter-spacing: 3.5px;
   border-radius: 10px;
-  border:none
+  border: none;
 }
 
 .play-again-btn:hover {
@@ -196,4 +196,18 @@ ol:hover {
   width: 310px;
   height: 110px;
   font-size: 2.4em;
+}
+
+.message-board {
+  margin: 0 auto; 
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid black;
+  box-shadow: 2px -2px 40px #5ce1e6, -2px 2px 40px #ff5757;
+  height: auto;
+  text-shadow: -2px 2px 5px #5ce1e6, 2px -2px 5px #ff5757;
+  font-size: 1.5em;
+  color: white;
+  width: auto;
+  text-align: center;
 }

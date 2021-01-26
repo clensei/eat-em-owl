@@ -15,9 +15,9 @@ class Owl {
     this.direction = "r";
     this.speed = 5;
     this.owlImage = new Image();
-    this.owlImage.src = "../img/owl-transp-100.png";
+    this.owlImage.src = "img/owl-transp-100.png";
     this.owlDyingImage = new Image();
-    this.owlDyingImage.src = "../img/owl-dying.png";
+    this.owlDyingImage.src = "img/owl-dying.png";
     this.sizeDecreaseRate = 0.01;
     this.size = this.width + this.height;
 
@@ -216,7 +216,7 @@ class Owl {
   updateBiggestSize() {
     if (this.width > this.biggestSize) {
       this.biggestSize = this.width;
-    } 
+    }
   }
 
   // decrease owl's size with time
@@ -225,8 +225,6 @@ class Owl {
     if (loopCounter % 20 === 0) {
       this.width -= 1;
       this.height = this.width / this.aspectRatio;
-      console.log('this.width :>> ', this.width);
     }
   }
-
 }

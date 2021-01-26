@@ -2,9 +2,8 @@
 
 let game; // instance of the Game
 let splashScreen; // Start Game Screen
-let gameScreen // create gameScreen
+let gameScreen; // create gameScreen
 let gameOverScreen;
-
 
 // Creates DOM elements from a string representation
 function buildDom(htmlString) {
@@ -53,23 +52,26 @@ function removeSplashScreen() {
 function createGameScreen() {
   gameScreen = buildDom(`
     <main>
-        <header class="game-display">
-            <div>
-                <span>Score:</span>
-                <span class="current-score"></span>
-            </div>
-            <div>
-                <span>Biggest Size:</span>
-                <span class="biggest-size"></span>
-            </div>
-            <div>
-                <span>Current Speed:<span>
-                <span class="current-speed"></span>
-            </div>
-        </header>  
-        <div class="canvas-container">
-            <canvas></canvas> 
+      <header class="game-display">
+        <div>
+          <span>Score:</span>
+          <span class="current-score"></span>
+        </div>
+        <div>
+          <span>Biggest Size:</span>
+          <span class="biggest-size"></span>
+        </div>
+        <div>
+          <span>Current Speed:<span>
+          <span class="current-speed"></span>
+        </div>
+      </header>  
+      <div class="canvas-container">
+        <canvas></canvas> 
         </div> 
+      <div class="message-board">
+        <span></span>
+      </div>
     </main>
     `);
 
@@ -109,7 +111,7 @@ function createGameOverScreen(score, bestSize) {
 }
 
 function removeGameOverScreen() {
-  if (gameOverScreen !== undefined){
+  if (gameOverScreen !== undefined) {
     gameOverScreen.remove();
   }
 }
@@ -117,19 +119,15 @@ function removeGameOverScreen() {
 // -- Setting the game state - start or game over
 
 function startGame() {
-  
-  
   removeSplashScreen();
   removeGameOverScreen();
-  
-  game = new Game(); 
-  game.gameScreen = createGameScreen(); 
-  
-  game.start(); 
 
-  game.backgroundMusic.play()
+  game = new Game();
+  game.gameScreen = createGameScreen();
 
+  game.start();
 
+  game.backgroundMusic.play();
 }
 
 function endGame(score, bestSize) {

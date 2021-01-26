@@ -1,20 +1,20 @@
 "use strict";
 
 class Bonus {
-  constructor(canvas, x, y, entranceSide) {
+  constructor(canvas, x, y, speed, entranceSide) {
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
 
-    this.width = 30;
-    this.height = 36;
+    this.width = 40;
+    this.height = 48;
     this.x = x;
     this.y = y;
-    this.speed = 10;
+    this.speed = speed;
     this.image = new Image();
     this.image.src = "/img/bonus.png";
     this.delete = false;
-    console.log("test bonus");
     this.entranceSide = entranceSide;
+    this.canShoot = false; 
   }
 
   draw() {
@@ -54,4 +54,6 @@ class Bonus {
         break;
     }
   }
+
+
 }

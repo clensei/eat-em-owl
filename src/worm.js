@@ -1,42 +1,40 @@
 "use strict";
 
 class Worm {
-    constructor(canvas, x, y, speed, entranceSide){
-        this.canvas = canvas; 
-        this.ctx = canvas.getContext("2d"); 
+  constructor(canvas, x, y, speed, entranceSide) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext("2d");
 
-        this.width = 30;
-        this.height = 30;
-        this.x = x; 
-        this.y = y; 
-        this.speed = speed; 
-        this.image = new Image(); 
-        this.image.src = ("/img/worm.png"); 
-        this.delete = false;
-        console.log("test worm");
-        this.entranceSide = entranceSide; 
+    this.width = 30;
+    this.height = 30;
+    this.x = x;
+    this.y = y;
+    this.speed = speed;
+    this.image = new Image();
+    this.image.src = "img/worm.png";
+    this.delete = false;
+    this.entranceSide = entranceSide;
+  }
+  draw() {
+    this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+  }
 
+  updatePosition() {
+    switch (this.entranceSide) {
+      case "u":
+        this.y = this.y + this.speed;
+        break;
+      case "d":
+        this.y = this.y - this.speed;
+        break;
+      case "r":
+        this.x = this.x - this.speed;
+        break;
+      case "l":
+        this.x = this.x + this.speed;
+        break;
     }
-    draw(){
-        this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-    }
-
-    updatePosition() {
-        switch (this.entranceSide) {
-          case "u":
-            this.y = this.y + this.speed;
-            break;
-          case "d":
-            this.y = this.y - this.speed;
-            break;
-          case "r":
-            this.x = this.x - this.speed;
-            break;
-          case "l":
-            this.x = this.x + this.speed;
-            break;
-        }
-    }
+  }
 
   isInsideScreen() {
     switch (this.entranceSide) {
@@ -54,6 +52,4 @@ class Worm {
         break;
     }
   }
-
-
 }
