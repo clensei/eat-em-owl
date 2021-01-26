@@ -11,10 +11,10 @@ class Bonus {
     this.y = y;
     this.speed = speed;
     this.image = new Image();
-    this.image.src = "/img/bonus.png";
+    this.image.src = "img/bonus.png";
     this.delete = false;
     this.entranceSide = entranceSide;
-    this.canShoot = false; 
+    this.canShoot = false;
   }
 
   draw() {
@@ -54,6 +54,4 @@ class Bonus {
         break;
     }
   }
-
-
 }
