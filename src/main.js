@@ -18,18 +18,21 @@ function createSplashScreen() {
   splashScreen = buildDom(`
   <main>
     <h1>EAT'EM </br><span class="owl">OWL</span> </h1>
-    <H2>INSTRUCTIONS</H2>
+    <H2><img src="img/arrow.png" class="arrow">INSTRUCTIONS<img src="img/arrowleft.png" class="arrow"></H2>
     <section class="instr-list">
         <li>
-            <ol>1/ Eat food to gain weight</ol>
+            <ol>1/ Eat pizza to gain weight</ol>
             <ol>2/ Eat worms to gain speed</ol>
             <ol>3/ Avoid viruses or lose weight</ol>
+            <ol>4/ Collect owls for Bonuses!</ol>
         </li>
         <div class="arrows">
-            Move around using the Arrows </br> of your keyboard. 
+            Move around using the Arrows </br> of your keyboard.</br></br>
+            <span>Press space to use your bonus!</span> 
         </div>
     </section>
     <div class="div-btn"> 
+        <div><img class="img-pizza" src="img/pizza.png"><img class="img-pizza" src="img/virus.png"><img class="img-pizza" src="img/worm.png"><img class="img-pizza" src="img/bonus.png"></div>
         <button class="play-btn">PLAY</button>
     </div>
   </main>

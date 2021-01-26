@@ -20,7 +20,7 @@ class Game {
     this.apparitionRatePizza = 0.99;
     this.apparitionRateVirus = 0.98;
     this.apparitionRateWorm = 0.995;
-    this.apparitionRateBonus = 0.9999;
+    this.apparitionRateBonus = 0.999;
     this.loopCounter = 0;
     this.backgroundMusic = new Audio("sounds/Audrey's Dance.mp3");
     this.pizzaSound = new Audio("sounds/eat sound.mp3");
