@@ -20,7 +20,7 @@ class Game {
     this.apparitionRatePizza = 0.99;
     this.apparitionRateVirus = 0.98;
     this.apparitionRateWorm = 0.995;
-    this.apparitionRateBonus = 0.99;
+    this.apparitionRateBonus = 0.9999;
     this.loopCounter = 0;
     this.backgroundMusic = new Audio("sounds/Audrey's Dance.mp3");
     this.pizzaSound = new Audio("sounds/eat sound.mp3");
@@ -70,6 +70,7 @@ class Game {
     function handleKeyUp(event) {
       if (event.key === " ") {
         this.shoot = false;
+        this.bonusTotal--; 
         console.log("KEY UP", this.shoot);
       }
     }
@@ -94,8 +95,6 @@ class Game {
 
       if (this.shoot === true && this.bonusTotal > 0) {
         this.virus = [];
-        this.bonusTotal--;
-        console.log("is this working?");
       }
 
       // create viruses / pizza / worm / bonus / bonus
