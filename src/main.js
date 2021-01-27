@@ -32,7 +32,11 @@ function createSplashScreen() {
         </div>
     </section>
     <div class="div-btn"> 
+<<<<<<< HEAD
         <div><img class="img-pizza" src="img/pizza.png"><img class="img-pizza" src="img/virus.png"><img class="img-pizza" src="img/worm.png"><img class="img-pizza" src="img/bonus.png"></div>
+=======
+        <div class="img-border"><img class="img-pizza" src="img/pizza.png"><img class="img-pizza" src="img/virus.png"><img class="img-pizza" src="img/worm.png"><img class="img-pizza" src="img/bonus.png"></div>
+>>>>>>> master
         <button class="play-btn">PLAY</button>
     </div>
   </main>

@@ -26,12 +26,16 @@ body {
   background-position: center;
   opacity: 1;
   height: 100vh;
-  width: 70%;
+  width: 75%;
   margin: 0 auto;
 }
 
 h1 {
+<<<<<<< HEAD
   margin-top: 100px;
+=======
+  margin-top: 70px;
+>>>>>>> master
   text-align: center;
   font-family: Bungee, "Courier New", Courier, monospace;
   font-size: 4rem;
@@ -63,10 +67,28 @@ h2 {
   align-items: center;
   text-shadow: #fc0 1px 0 10px;
   font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.img-border {
+  padding: 15px 40px 15px 0px;
+  box-shadow: 2px -2px 10px #3abebe, -2px 2px 10px #ff5757;
+  width: 450px;
+  margin: 0 auto;
+  border-radius: 15px 5px 15px 5px;
+  text-align: center;
 }
 
 .arrows {
   text-align: center;
+  padding-left: 15px;
+  transition: 0.2s;
+}
+
+.arrows:hover {
+  text-shadow: #fc0 0px 10px 50px;
+  text-shadow: -2px 2px 15px #5ce1e6, 2px -2px 5px #ff5757;
+  font-size: 1.1em;
   transition: 0.2s;
 }
 
@@ -143,6 +165,7 @@ ol:hover {
   border: 1px solid black;
   box-shadow: 2px -2px 40px #5ce1e6, -2px 2px 40px #ff5757;
   height: 70vh;
+  border-radius: 10px;
 }
 
 .wl-end {
@@ -247,3 +270,84 @@ ol:hover {
   margin-left: 15px;
   transition: 0.2s;
 }
+<<<<<<< HEAD
+=======
+
+.dying-background {
+  background-image: url("../img/owl-transp-30.png");
+  background-color: #112e51;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: mymove 0.3s infinite;
+  animation-direction: alternate-reverse;
+}
+
+.really-dying-background {
+  background-image: url("../img/owl-transp-30.png");
+  background-color: #112e51;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: mymove 0.1s infinite;
+  animation-direction: alternate-reverse;
+}
+
+.bonus-shoot {
+  background-image: url("../img/owl-transp-30.png");
+  background-color: #112e51;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: mymove 0.2s infinite;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes mymove {
+  0% {
+    background-color: #5ce1e6;
+  }
+  25% {
+    background-color: orange;
+  }
+  50% {
+    background-color: #ff5757;
+  }
+  100% {
+    background-color: purple;
+  }
+}
+
+.eat-pizza {
+  background-image: url("../img/pizza-background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 1;
+  width: 100%;
+  height: auto;
+}
+
+.eat-worm {
+  background-image: url("../img/worm-background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 1;
+  width: 100%;
+  height: auto;
+}
+
+.eat-bonus {
+  background-image: url("../img/bonus-background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 1;
+  width: 100%;
+  height: auto;
+}
+
+.eat-virus {
+  background-image: url("../img/virus-background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 1;
+  width: 100%;
+  height: auto;
+}
+>>>>>>> master

@@ -22,6 +22,7 @@ class Game {
     this.apparitionRateWorm = 0.995;
     this.apparitionRateBonus = 0.999;
     this.loopCounter = 0;
+<<<<<<< HEAD
     this.backgroundMusic = new Audio("sounds/Audrey's Dance.mp3");
     this.pizzaSound = new Audio("sounds/eat sound.mp3");
     this.virusSound = new Audio("sounds/Homer Simpson Doh sound effect.mp3");
@@ -29,6 +30,17 @@ class Game {
       "sounds/Super Mario Power Up Sound Effect.mp3"
     );
     this.deathSound = new Audio("sounds/Wilhelm Scream sound effect.mp3");
+=======
+    this.backgroundImgOwl = new Image();
+    this.backgroundImgOwl.src = "/img/owl-transp-30.png";
+    this.backgroundMusic = new Audio("sounds/Audrey's Dance.mp3");
+    this.pizzaSound = new Audio("sounds/eat sound.mp3");
+    this.virusSound = new Audio("sounds/Homer Simpson Doh sound effect.mp3");
+    this.wormSound = new Audio("sounds/Super Mario Power Up Sound Effect.mp3");
+    this.deathSound = new Audio("sounds/Wilhelm Scream sound effect.mp3");
+    this.bonusSound = new Audio("sounds/bonus.mp3");
+    this.shootSound = new Audio("sounds/blaster.mp3");
+>>>>>>> master
     this.bonusTotal = 0;
     this.bonusLoopCounter = 0;
     this.shoot = false;
@@ -43,6 +55,10 @@ class Game {
     this.biggestSizeElement = document.body.querySelector(".biggest-size");
     this.speedElement = document.body.querySelector(".current-speed");
     this.bonusElement = document.body.querySelector(".message-board span");
+<<<<<<< HEAD
+=======
+    this.gameBody = document.body.querySelector("canvas");
+>>>>>>> master
 
     this.containerWidth = this.canvasContainer.offsetWidth;
     this.containerHeight = this.canvasContainer.offsetHeight;
@@ -70,7 +86,14 @@ class Game {
     function handleKeyUp(event) {
       if (event.key === " ") {
         this.shoot = false;
+<<<<<<< HEAD
         this.bonusTotal--; 
+=======
+        this.bonusTotal--;
+        if (this.bonusTotal === -1) {
+          this.bonusTotal = 0;
+        }
+>>>>>>> master
         console.log("KEY UP", this.shoot);
       }
     }
@@ -94,7 +117,17 @@ class Game {
       this.changeBackground();
 
       if (this.shoot === true && this.bonusTotal > 0) {
+<<<<<<< HEAD
         this.virus = [];
+=======
+        this.changeBackgroundShoot();
+        this.shootSound.play();
+        this.virus = [];
+        setTimeout(() => {
+          let gameBody = document.body.querySelector("canvas");
+          gameBody.classList.remove("bonus-shoot");
+        }, 200);
+>>>>>>> master
       }
 
       // create viruses / pizza / worm / bonus / bonus
@@ -269,6 +302,7 @@ class Game {
           }
           return ranLet;
         }
+<<<<<<< HEAD
 
         function xyGenerator(ranLet) {
           if (ranLet === "u") {
@@ -289,6 +323,28 @@ class Game {
         udlrGenerator();
         xyGenerator(ranLet);
 
+=======
+
+        function xyGenerator(ranLet) {
+          if (ranLet === "u") {
+            yVirus = 0;
+            xVirus = Math.random() * document.querySelector("canvas").width;
+          } else if (ranLet === "d") {
+            yVirus = document.querySelector("canvas").height;
+            xVirus = Math.random() * document.querySelector("canvas").width;
+          } else if (ranLet === "l") {
+            xVirus = 0;
+            yVirus = Math.random() * document.querySelector("canvas").height;
+          } else if (ranLet === "r") {
+            xVirus = document.querySelector("canvas").width;
+            yVirus = Math.random() * document.querySelector("canvas").height;
+          }
+        }
+
+        udlrGenerator();
+        xyGenerator(ranLet);
+
+>>>>>>> master
         const newBonus = new Bonus(
           this.canvas,
           xVirus,
@@ -383,6 +439,8 @@ class Game {
         this.owl.decreaseSizeVirus();
         this.score -= 200;
         virus.x = 0 - this.virus.height;
+        this.backgroundCollisionsVirus();
+        setTimeout(this.removeVirusBackground, 300);
       }
     }, this);
   }
@@ -393,6 +451,8 @@ class Game {
         this.owl.increaseSizePizza();
         this.score += 300;
         pizza.x = 0 - this.pizza.height;
+        this.backgroundCollisionsPizza();
+        setTimeout(this.removePizzaBackground, 400);
       }
     }, this);
   }
@@ -403,9 +463,24 @@ class Game {
         this.owl.increaseSpeedWorm();
         this.score += 500;
         worm.x = 0 - this.pizza.height;
+        this.backgroundCollisionsWorm();
+        setTimeout(this.removeWormBackground, 400);
       }
     }, this);
   }
+  checkCollisionsBonus() {
+    this.bonus.forEach(function (bonus) {
+      if (this.owl.didCollideWithBonus(bonus)) {
+        this.bonusSound.play();
+        this.bonusTotal++;
+        this.score = this.score + 1000;
+        bonus.x = 0 - this.bonus.height;
+        this.backgroundCollisionsBonus();
+        setTimeout(this.removeBonusBackground, 400);
+      }
+    }, this);
+  }
+<<<<<<< HEAD
   checkCollisionsBonus() {
     this.bonus.forEach(function (bonus) {
       if (this.owl.didCollideWithBonus(bonus)) {
@@ -415,6 +490,8 @@ class Game {
       }
     }, this);
   }
+=======
+>>>>>>> master
 
   gameOver() {
     this.deathSound.play();
@@ -423,13 +500,21 @@ class Game {
   }
 
   changeBackground() {
-    if (this.score > 1000) {
-      document.querySelector(".canvas-container").style.backgroundColor =
-        "#" + Math.floor(Math.random() * 1000000) + 1;
+    let gameBody = document.body.querySelector("canvas");
+
+    if (this.owl.width > 50) {
+      gameBody.classList.remove("really-dying-background", "dying-background");
+    } else if (this.owl.width < 50) {
+      gameBody.classList.add("dying-background");
     }
-    if (this.score > 1050) {
-      document.querySelector(".canvas-container").style.backgroundColor = "";
+    if (this.owl.width < 32) {
+      gameBody.classList.add("really-dying-background");
     }
+  }
+
+  changeBackgroundShoot() {
+    let gameBody = document.body.querySelector("canvas");
+    gameBody.classList.add("bonus-shoot");
   }
 
   updateGameStats() {
@@ -452,4 +537,41 @@ class Game {
       }
     }
   }
+<<<<<<< HEAD
+=======
+
+  backgroundCollisionsPizza() {
+    this.gameBody.classList.add("eat-pizza");
+  }
+  removePizzaBackground() {
+    this.gameBody = document.body.querySelector("canvas");
+    this.gameBody.classList.remove("eat-pizza");
+  }
+
+  backgroundCollisionsWorm() {
+    this.gameBody.classList.add("eat-worm");
+  }
+  removeWormBackground() {
+    this.gameBody = document.body.querySelector("canvas");
+    this.gameBody.classList.remove("eat-worm");
+  }
+
+  backgroundCollisionsBonus() {
+    this.gameBody.classList.add("eat-bonus");
+  }
+  removeBonusBackground() {
+    this.gameBody = document.body.querySelector("canvas");
+    this.gameBody.classList.remove("eat-bonus");
+  }
+
+  backgroundCollisionsVirus() {
+    this.gameBody.classList.add("eat-virus");
+    console.log("is this working?");
+  }
+
+  removeVirusBackground() {
+    this.gameBody = document.body.querySelector("canvas");
+    this.gameBody.classList.remove("eat-virus");
+  }
+>>>>>>> master
 }
