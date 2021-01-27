@@ -52,8 +52,4 @@ class Worm {
         break;
     }
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> master

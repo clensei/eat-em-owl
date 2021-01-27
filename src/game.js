@@ -22,15 +22,6 @@ class Game {
     this.apparitionRateWorm = 0.995;
     this.apparitionRateBonus = 0.999;
     this.loopCounter = 0;
-<<<<<<< HEAD
-    this.backgroundMusic = new Audio("sounds/Audrey's Dance.mp3");
-    this.pizzaSound = new Audio("sounds/eat sound.mp3");
-    this.virusSound = new Audio("sounds/Homer Simpson Doh sound effect.mp3");
-    this.wormSound = new Audio(
-      "sounds/Super Mario Power Up Sound Effect.mp3"
-    );
-    this.deathSound = new Audio("sounds/Wilhelm Scream sound effect.mp3");
-=======
     this.backgroundImgOwl = new Image();
     this.backgroundImgOwl.src = "/img/owl-transp-30.png";
     this.backgroundMusic = new Audio("sounds/Audrey's Dance.mp3");
@@ -40,7 +31,6 @@ class Game {
     this.deathSound = new Audio("sounds/Wilhelm Scream sound effect.mp3");
     this.bonusSound = new Audio("sounds/bonus.mp3");
     this.shootSound = new Audio("sounds/blaster.mp3");
->>>>>>> master
     this.bonusTotal = 0;
     this.bonusLoopCounter = 0;
     this.shoot = false;
@@ -55,10 +45,7 @@ class Game {
     this.biggestSizeElement = document.body.querySelector(".biggest-size");
     this.speedElement = document.body.querySelector(".current-speed");
     this.bonusElement = document.body.querySelector(".message-board span");
-<<<<<<< HEAD
-=======
     this.gameBody = document.body.querySelector("canvas");
->>>>>>> master
 
     this.containerWidth = this.canvasContainer.offsetWidth;
     this.containerHeight = this.canvasContainer.offsetHeight;
@@ -86,14 +73,10 @@ class Game {
     function handleKeyUp(event) {
       if (event.key === " ") {
         this.shoot = false;
-<<<<<<< HEAD
-        this.bonusTotal--; 
-=======
         this.bonusTotal--;
         if (this.bonusTotal === -1) {
           this.bonusTotal = 0;
         }
->>>>>>> master
         console.log("KEY UP", this.shoot);
       }
     }
@@ -117,9 +100,6 @@ class Game {
       this.changeBackground();
 
       if (this.shoot === true && this.bonusTotal > 0) {
-<<<<<<< HEAD
-        this.virus = [];
-=======
         this.changeBackgroundShoot();
         this.shootSound.play();
         this.virus = [];
@@ -127,7 +107,6 @@ class Game {
           let gameBody = document.body.querySelector("canvas");
           gameBody.classList.remove("bonus-shoot");
         }, 200);
->>>>>>> master
       }
 
       // create viruses / pizza / worm / bonus / bonus
@@ -302,7 +281,6 @@ class Game {
           }
           return ranLet;
         }
-<<<<<<< HEAD
 
         function xyGenerator(ranLet) {
           if (ranLet === "u") {
@@ -323,28 +301,6 @@ class Game {
         udlrGenerator();
         xyGenerator(ranLet);
 
-=======
-
-        function xyGenerator(ranLet) {
-          if (ranLet === "u") {
-            yVirus = 0;
-            xVirus = Math.random() * document.querySelector("canvas").width;
-          } else if (ranLet === "d") {
-            yVirus = document.querySelector("canvas").height;
-            xVirus = Math.random() * document.querySelector("canvas").width;
-          } else if (ranLet === "l") {
-            xVirus = 0;
-            yVirus = Math.random() * document.querySelector("canvas").height;
-          } else if (ranLet === "r") {
-            xVirus = document.querySelector("canvas").width;
-            yVirus = Math.random() * document.querySelector("canvas").height;
-          }
-        }
-
-        udlrGenerator();
-        xyGenerator(ranLet);
-
->>>>>>> master
         const newBonus = new Bonus(
           this.canvas,
           xVirus,
@@ -480,7 +436,6 @@ class Game {
       }
     }, this);
   }
-<<<<<<< HEAD
   checkCollisionsBonus() {
     this.bonus.forEach(function (bonus) {
       if (this.owl.didCollideWithBonus(bonus)) {
@@ -490,8 +445,6 @@ class Game {
       }
     }, this);
   }
-=======
->>>>>>> master
 
   gameOver() {
     this.deathSound.play();
@@ -537,8 +490,6 @@ class Game {
       }
     }
   }
-<<<<<<< HEAD
-=======
 
   backgroundCollisionsPizza() {
     this.gameBody.classList.add("eat-pizza");
@@ -568,10 +519,8 @@ class Game {
     this.gameBody.classList.add("eat-virus");
     console.log("is this working?");
   }
-
   removeVirusBackground() {
     this.gameBody = document.body.querySelector("canvas");
     this.gameBody.classList.remove("eat-virus");
   }
->>>>>>> master
 }
