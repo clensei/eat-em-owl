@@ -26,12 +26,12 @@ body {
   background-position: center;
   opacity: 1;
   height: 100vh;
-  width: 70%;
+  width: 75%;
   margin: 0 auto;
 }
 
 h1 {
-  margin-top: 100px;
+  margin-top: 70px;
   text-align: center;
   font-family: Bungee, "Courier New", Courier, monospace;
   font-size: 4rem;
@@ -63,10 +63,21 @@ h2 {
   align-items: center;
   text-shadow: #fc0 1px 0 10px;
   font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.img-border {
+  padding: 15px 40px 15px 0px;
+  box-shadow: 2px -2px 10px #3abebe, -2px 2px 10px #ff5757;
+  width: 450px;
+  margin: 0 auto; 
+  border-radius: 15px 5px 15px 5px;
+  text-align: center;
 }
 
 .arrows {
   text-align: center;
+  padding-left: 15px;
   transition: 0.2s;
 }
 
@@ -143,6 +154,7 @@ ol:hover {
   border: 1px solid black;
   box-shadow: 2px -2px 40px #5ce1e6, -2px 2px 40px #ff5757;
   height: 70vh;
+  border-radius: 10px;
 }
 
 .wl-end {
@@ -246,4 +258,31 @@ ol:hover {
   margin-right: 15px;
   margin-left: 15px;
   transition: 0.2s;
+}
+
+.dying-background {
+  background-image: url("../img/owl-transp-30.png");
+  background-color: #112e51;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: mymove .3s infinite;
+  animation-direction: alternate-reverse;
+}
+
+
+.really-dying-background {
+  background-image: url("../img/owl-transp-30.png");
+  background-color: #112e51;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: mymove .1s infinite;
+  animation-direction: alternate-reverse;
+}
+
+
+@keyframes mymove {
+  0% {background-color:#5ce1e6;}
+  25% {background-color: orange}
+  50% {background-color: #ff5757;}
+  100% {background-color: purple;}
 }

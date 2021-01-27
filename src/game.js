@@ -22,12 +22,12 @@ class Game {
     this.apparitionRateWorm = 0.995;
     this.apparitionRateBonus = 0.999;
     this.loopCounter = 0;
+    this.backgroundImgOwl = new Image();
+    this.backgroundImgOwl.src = "/img/owl-transp-30.png";
     this.backgroundMusic = new Audio("sounds/Audrey's Dance.mp3");
     this.pizzaSound = new Audio("sounds/eat sound.mp3");
     this.virusSound = new Audio("sounds/Homer Simpson Doh sound effect.mp3");
-    this.wormSound = new Audio(
-      "sounds/Super Mario Power Up Sound Effect.mp3"
-    );
+    this.wormSound = new Audio("sounds/Super Mario Power Up Sound Effect.mp3");
     this.deathSound = new Audio("sounds/Wilhelm Scream sound effect.mp3");
     this.bonusTotal = 0;
     this.bonusLoopCounter = 0;
@@ -43,6 +43,8 @@ class Game {
     this.biggestSizeElement = document.body.querySelector(".biggest-size");
     this.speedElement = document.body.querySelector(".current-speed");
     this.bonusElement = document.body.querySelector(".message-board span");
+    this.gameBody = document.body.querySelector("canvas");
+
 
     this.containerWidth = this.canvasContainer.offsetWidth;
     this.containerHeight = this.canvasContainer.offsetHeight;
@@ -70,7 +72,7 @@ class Game {
     function handleKeyUp(event) {
       if (event.key === " ") {
         this.shoot = false;
-        this.bonusTotal--; 
+        this.bonusTotal--;
         console.log("KEY UP", this.shoot);
       }
     }
@@ -423,12 +425,15 @@ class Game {
   }
 
   changeBackground() {
-    if (this.score > 1000) {
-      document.querySelector(".canvas-container").style.backgroundColor =
-        "#" + Math.floor(Math.random() * 1000000) + 1;
+    let gameBody = document.body.querySelector("canvas");
+
+    if (this.owl.width > 50) {
+      gameBody.classList.remove("really-dying-background", "dying-background");
+    } else if (this.owl.width < 50) {
+      gameBody.classList.add("dying-background");
     }
-    if (this.score > 1050) {
-      document.querySelector(".canvas-container").style.backgroundColor = "";
+    if (this.owl.width < 32) {
+      gameBody.classList.add("really-dying-background");
     }
   }
 
