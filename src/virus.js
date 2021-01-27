@@ -11,9 +11,8 @@ class Virus {
     this.y = y;
     this.speed = speed;
     this.image = new Image();
-    this.image.src = "/img/virus.png";
+    this.image.src = "img/virus.png";
     this.delete = false;
-    console.log("test virus");
     this.entranceSide = entranceSide; 
   }
 
