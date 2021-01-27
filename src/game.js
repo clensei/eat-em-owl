@@ -29,6 +29,8 @@ class Game {
     this.virusSound = new Audio("sounds/Homer Simpson Doh sound effect.mp3");
     this.wormSound = new Audio("sounds/Super Mario Power Up Sound Effect.mp3");
     this.deathSound = new Audio("sounds/Wilhelm Scream sound effect.mp3");
+    this.bonusSound = new Audio("sounds/bonus.mp3");
+    this.shootSound = new Audio("sounds/blaster.mp3");
     this.bonusTotal = 0;
     this.bonusLoopCounter = 0;
     this.shoot = false;
@@ -44,7 +46,6 @@ class Game {
     this.speedElement = document.body.querySelector(".current-speed");
     this.bonusElement = document.body.querySelector(".message-board span");
     this.gameBody = document.body.querySelector("canvas");
-
 
     this.containerWidth = this.canvasContainer.offsetWidth;
     this.containerHeight = this.canvasContainer.offsetHeight;
@@ -73,6 +74,9 @@ class Game {
       if (event.key === " ") {
         this.shoot = false;
         this.bonusTotal--;
+        if (this.bonusTotal === -1) {
+          this.bonusTotal = 0;
+        }
         console.log("KEY UP", this.shoot);
       }
     }
@@ -96,7 +100,13 @@ class Game {
       this.changeBackground();
 
       if (this.shoot === true && this.bonusTotal > 0) {
+        this.changeBackgroundShoot();
+        this.shootSound.play();
         this.virus = [];
+        setTimeout(() => {
+          let gameBody = document.body.querySelector("canvas");
+          gameBody.classList.remove("bonus-shoot");
+        }, 200);
       }
 
       // create viruses / pizza / worm / bonus / bonus
@@ -385,6 +395,8 @@ class Game {
         this.owl.decreaseSizeVirus();
         this.score -= 200;
         virus.x = 0 - this.virus.height;
+        this.backgroundCollisionsVirus();
+        setTimeout(this.removeVirusBackground, 300);
       }
     }, this);
   }
@@ -395,6 +407,8 @@ class Game {
         this.owl.increaseSizePizza();
         this.score += 300;
         pizza.x = 0 - this.pizza.height;
+        this.backgroundCollisionsPizza();
+        setTimeout(this.removePizzaBackground, 400);
       }
     }, this);
   }
@@ -405,15 +419,20 @@ class Game {
         this.owl.increaseSpeedWorm();
         this.score += 500;
         worm.x = 0 - this.pizza.height;
+        this.backgroundCollisionsWorm();
+        setTimeout(this.removeWormBackground, 400);
       }
     }, this);
   }
   checkCollisionsBonus() {
     this.bonus.forEach(function (bonus) {
       if (this.owl.didCollideWithBonus(bonus)) {
+        this.bonusSound.play();
         this.bonusTotal++;
         this.score = this.score + 1000;
         bonus.x = 0 - this.bonus.height;
+        this.backgroundCollisionsBonus();
+        setTimeout(this.removeBonusBackground, 400);
       }
     }, this);
   }
@@ -437,6 +456,11 @@ class Game {
     }
   }
 
+  changeBackgroundShoot() {
+    let gameBody = document.body.querySelector("canvas");
+    gameBody.classList.add("bonus-shoot");
+  }
+
   updateGameStats() {
     this.score += 1;
     this.biggestSize = this.owl.biggestSize;
@@ -456,5 +480,39 @@ class Game {
         this.bonusLoopCounter = 0;
       }
     }
+  }
+
+  backgroundCollisionsPizza() {
+    this.gameBody.classList.add("eat-pizza");
+  }
+  removePizzaBackground() {
+    this.gameBody = document.body.querySelector("canvas");
+    this.gameBody.classList.remove("eat-pizza");
+  }
+
+  backgroundCollisionsWorm() {
+    this.gameBody.classList.add("eat-worm");
+  }
+  removeWormBackground() {
+    this.gameBody = document.body.querySelector("canvas");
+    this.gameBody.classList.remove("eat-worm");
+  }
+
+  backgroundCollisionsBonus() {
+    this.gameBody.classList.add("eat-bonus");
+  }
+  removeBonusBackground() {
+    this.gameBody = document.body.querySelector("canvas");
+    this.gameBody.classList.remove("eat-bonus");
+  }
+
+  backgroundCollisionsVirus() {
+    this.gameBody.classList.add("eat-virus");
+    console.log("is this working?");
+  }
+
+  removeVirusBackground() {
+    this.gameBody = document.body.querySelector("canvas");
+    this.gameBody.classList.remove("eat-virus");
   }
 }
