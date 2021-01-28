@@ -131,6 +131,7 @@ function startGame() {
   game.start();
 
   game.backgroundMusic.play();
+  game.backgroundMusic.volume= 0.5;
 }
 
 function endGame(score, bestSize) {

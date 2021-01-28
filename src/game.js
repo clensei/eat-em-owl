@@ -20,7 +20,7 @@ class Game {
     this.apparitionRatePizza = 0.99;
     this.apparitionRateVirus = 0.98;
     this.apparitionRateWorm = 0.995;
-    this.apparitionRateBonus = 0.999;
+    this.apparitionRateBonus = 0.9975;
     this.loopCounter = 0;
     this.backgroundImgOwl = new Image();
     this.backgroundImgOwl.src = "/img/owl-transp-30.png";
@@ -102,6 +102,7 @@ class Game {
       if (this.shoot === true && this.bonusTotal > 0) {
         this.changeBackgroundShoot();
         this.shootSound.play();
+        this.shootSound.volume = 0.7;
         this.virus = [];
         setTimeout(() => {
           let gameBody = document.body.querySelector("canvas");
@@ -112,7 +113,7 @@ class Game {
       // create viruses / pizza / worm / bonus / bonus
 
       if (this.biggestSize > 150) {
-        this.apparitionRateVirus -= 0.00001;
+        this.apparitionRateVirus -= 0.0000105;
       }
 
       if (Math.random() > this.apparitionRateVirus) {
@@ -392,6 +393,7 @@ class Game {
     this.virus.forEach(function (virus) {
       if (this.owl.didCollideWithVirus(virus)) {
         this.virusSound.play();
+        this.virusSound.volume = 0.7;
         this.owl.decreaseSizeVirus();
         this.score -= 200;
         virus.x = 0 - this.virus.height;
@@ -404,6 +406,7 @@ class Game {
     this.pizza.forEach(function (pizza) {
       if (this.owl.didCollideWithPizza(pizza)) {
         this.pizzaSound.play();
+        this.pizzaSound.volume = 0.7;
         this.owl.increaseSizePizza();
         this.score += 300;
         pizza.x = 0 - this.pizza.height;
@@ -416,6 +419,7 @@ class Game {
     this.worm.forEach(function (worm) {
       if (this.owl.didCollideWithWorm(worm)) {
         this.wormSound.play();
+        this.wormSound.volume = 0.7;
         this.owl.increaseSpeedWorm();
         this.score += 500;
         worm.x = 0 - this.pizza.height;
@@ -428,20 +432,12 @@ class Game {
     this.bonus.forEach(function (bonus) {
       if (this.owl.didCollideWithBonus(bonus)) {
         this.bonusSound.play();
+        this.bonusSound.volume = 0.7;
         this.bonusTotal++;
         this.score = this.score + 1000;
         bonus.x = 0 - this.bonus.height;
         this.backgroundCollisionsBonus();
         setTimeout(this.removeBonusBackground, 400);
-      }
-    }, this);
-  }
-  checkCollisionsBonus() {
-    this.bonus.forEach(function (bonus) {
-      if (this.owl.didCollideWithBonus(bonus)) {
-        this.bonusTotal++;
-        this.score = this.score + 1000;
-        bonus.x = 0 - this.bonus.height;
       }
     }, this);
   }
